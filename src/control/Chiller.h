@@ -1,10 +1,14 @@
-
 #ifndef CHILLER_H
 #define CHILLER_H
+
+#include "EEPROM.h"
+#include "Arduino.h"
 
 class Chiller
 {
   public:
+    const char* name;
+
     static int const memSpaceTotal = 128;
     int index;
     int addr;
@@ -16,10 +20,12 @@ class Chiller
     float setPoint;
     float tolerance;
     unsigned long previousCycleTime;
-    int minCycleDuration_Minutes;
+    unsigned int minCycleDuration_Minutes;
 
   public:
     Chiller( int index );
+    Chiller( int index, const char* name );
+    virtual ~Chiller(){}
     void update();
     float readTemp();
     void cycle(bool on);

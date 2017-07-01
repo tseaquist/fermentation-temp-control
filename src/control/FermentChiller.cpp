@@ -1,8 +1,6 @@
 #include "FermentChiller.h"
-#include "Arduino.h"
-#include "EEPROM.h"
 
-FermentChiller::FermentChiller(int index) : Chiller(index)
+FermentChiller::FermentChiller(int index, const char* name) : Chiller(index, name)
 {
   EEPROM.get(addr + rampModeOnOffset, rampModeOn);
   if(rampModeOn)

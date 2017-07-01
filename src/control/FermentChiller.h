@@ -2,6 +2,9 @@
 #define FERMENT_H
 
 #include "Chiller.h"
+#include "Arduino.h"
+#include "EEPROM.h"
+#include "../util/stringutil.h"
 
 class FermentChiller : public Chiller
 {
@@ -24,7 +27,7 @@ class FermentChiller : public Chiller
       + 1 * sizeof(bool);
 
   public:
-    FermentChiller( int index );
+    FermentChiller( int index, const char* name );
     void update();
     float getRampSetPoint(unsigned int rampTotalDuration_Hours);
 

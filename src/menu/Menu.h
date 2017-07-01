@@ -1,20 +1,14 @@
-#include "MenuItem.h"
 #include "../control/TempControllers.h"
 #include "../display/LCD.h"
-/*
-Chiller, Fermentor 1, Fermentor 2, ..., Settings
-
-Chiller -> SetPoint, Tolerance, MinCycleDuration
-
-Fermentor i -> SetPoint, Tolerance, MinCycleDuration, Ramp i (on off)
-
-Ramp i on -> (Fires choice selection menu)
-          startTemp -> endTemp -> duration ->
-*/
+#include "ParameterSettingTypes.h"
+#include "ChillerMenuItems.h"
 
 class Menu
 {
   public:
+    char title[17] = {0};
+    char value[17] = {0};
+
     bool menuOn;
     MenuItem* rootItem;
     MenuItem* currentItem;

@@ -3,7 +3,7 @@
 
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
-#include "stringutil.h"
+#include "../util/stringutil.h"
 
 class LCD
 {

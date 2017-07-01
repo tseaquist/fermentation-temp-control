@@ -30,7 +30,6 @@ void prependForLcd(char* dest, const char* prepend, const char* str)
 
 void appendForLcd(char* dest, const char* append, const char* str)
 {
-
   prependForLcd(dest, str, append);
 }
 
@@ -56,22 +55,22 @@ const char* toString(float val, int precision)
   return fltpstr;
 }
 
-char intstr[5] = "";
+char intstr[12] = "";
 const char* toString(int val)
 {
   itoa(val, intstr, 10);
   return intstr;
 }
 
-char unsgnintstr[5] = "";
+char unsgnintstr[12] = "";
 const char* toString(unsigned int val)
 {
   utoa(val, unsgnintstr, 10);
   return unsgnintstr;
 }
 
-char onstr[3] = "ON";
-char offstr[4] = "OFF";
+const char onstr[3] = "ON";
+const char offstr[4] = "OFF";
 const char* toString(bool val)
 {
   return val ? onstr : offstr;

@@ -1,9 +1,10 @@
 #include "Chiller.h"
-#include "EEPROM.h"
-#include "Arduino.h"
 
-Chiller::Chiller(int index)
+Chiller::Chiller(int index) : Chiller(index, "Cooler"){}
+
+Chiller::Chiller(int index, const char* name)
 {
+  this->name = name;
   this->index = index;
   this->addr = index * memSpaceTotal;
   EEPROM.get(addr + setPointOffset, setPoint);
@@ -38,7 +39,7 @@ void Chiller::update()
   bool aboveThreshold = temp > setPoint + tolerance;
   bool belowThreshold = temp < setPoint - tolerance;
   unsigned long sinceLastCycle = ( millis() - previousCycleTime );
-  int sinceLastCycle_Minutes = ( int ) ( sinceLastCycle / 60000.0 );
+  unsigned int sinceLastCycle_Minutes = ( unsigned ) ( sinceLastCycle / 60000.0 );
   bool cycleSafe = sinceLastCycle_Minutes > minCycleDuration_Minutes;
 
   if(!isOn && aboveThreshold && cycleSafe)

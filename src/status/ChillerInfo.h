@@ -1,7 +1,7 @@
 #include "Info.h"
 #include "../control/Chiller.h"
 #include "Arduino.h"
-#include "../display/stringutil.h"
+#include "../util/stringutil.h"
 
 class ChillerInfo : public Info
 {

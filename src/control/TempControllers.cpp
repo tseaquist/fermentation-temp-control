@@ -4,7 +4,7 @@ TempControllers::TempControllers( )
 {
   for(int i = 0; i < numFerments; i++)
   {
-    fermentChillers[i] = new FermentChiller(i);
+    fermentChillers[i] = new FermentChiller(i, names[i]);
   }
   chillerLiquid = new Chiller(numFerments);
 }
