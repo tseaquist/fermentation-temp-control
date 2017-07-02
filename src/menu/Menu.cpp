@@ -3,21 +3,25 @@
 Menu::Menu(TempControllers* controls, LCD* lcd)
 {
   this->lcd = lcd;
-  MenuItem* chillingLiquid = new ChillerMenuItem(controls->chillerLiquid);
-  rootItem = chillingLiquid;
-  currentItem = chillingLiquid;
-  MenuItem* previousItem = chillingLiquid;
-  MenuItem* item;
-  for(int i = 0; i < controls->numFerments; i++)
+  MenuItem* item = new FermentorMenuItem(controls->fermentChillers[0]);
+  rootItem = item;
+  currentItem = item;
+  MenuItem* previousItem = item;
+  for(int i = 1; i < controls->numFerments; i++)
   {
     item = new FermentorMenuItem(controls->fermentChillers[i]);
     item->left = previousItem;
     previousItem->right = item;
     previousItem = item;
   }
+  item = new ChillerMenuItem(controls->chillerLiquid);
+  item->left = previousItem;
+  previousItem->right = item;
+  previousItem = item;
   item = new ResetDefaults(controls);
   item->left = previousItem;
   previousItem->right = item;
+  previousItem = item;
 
   onOff(false);
 }
