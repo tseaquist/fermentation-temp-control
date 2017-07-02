@@ -1,4 +1,5 @@
 #include "FermentChiller.h"
+#include <EEPROM.h>
 
 FermentChiller::FermentChiller(int index, const char* name) : Chiller(index, name)
 {

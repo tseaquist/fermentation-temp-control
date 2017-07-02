@@ -5,6 +5,7 @@ class ChillerMenuItem : public MenuItem
 {
 public:
   MenuItem* itemList[3] = {0};
+  Chiller* chiller;
   ChillerMenuItem(Chiller* chiller);
   virtual ~ChillerMenuItem(){}
   void getTitle(char* title);

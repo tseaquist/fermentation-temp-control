@@ -3,7 +3,6 @@
 
 #include "Chiller.h"
 #include "Arduino.h"
-#include "EEPROM.h"
 #include "../util/stringutil.h"
 
 class FermentChiller : public Chiller

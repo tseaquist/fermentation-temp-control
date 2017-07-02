@@ -1,7 +1,6 @@
 #ifndef CHILLER_H
 #define CHILLER_H
 
-#include "EEPROM.h"
 #include "Arduino.h"
 
 class Chiller

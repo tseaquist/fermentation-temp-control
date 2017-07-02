@@ -10,6 +10,7 @@ class FloatItem : public MenuItem
   public:
     float selection;
     bool active;
+    Chiller* chiller;
     FloatItem(Chiller* chiller);
     virtual ~FloatItem(){};
     virtual void getTitle(char* title){};
@@ -23,6 +24,7 @@ class IntItem : public MenuItem
   public:
     unsigned int selection;
     bool active;
+    Chiller* chiller;
     IntItem(Chiller* chiller);
     virtual ~IntItem(){};
     virtual void getTitle(char* title){};
@@ -35,7 +37,8 @@ class BoolItem : public MenuItem
 {
   public:
     bool selection;
-    bool active = false;
+    bool active;
+    Chiller* chiller;
     BoolItem(Chiller* chiller);
     virtual ~BoolItem(){};
     virtual void getTitle(char* title){};

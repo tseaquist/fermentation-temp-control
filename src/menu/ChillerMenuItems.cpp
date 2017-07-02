@@ -1,8 +1,9 @@
 #include "ChillerMenuItems.h"
 #include <MemoryFree.h>
 
-ChillerMenuItem::ChillerMenuItem(Chiller* chiller):MenuItem(chiller)
+ChillerMenuItem::ChillerMenuItem(Chiller* chiller):MenuItem()
 {
+  this->chiller = chiller;
   up = NULL;
 }
 void ChillerMenuItem::getTitle(char* title)

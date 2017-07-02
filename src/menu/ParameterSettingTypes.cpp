@@ -5,8 +5,9 @@ const char* notActive = "~";
 const char* on = "ON";
 const char* off = "OFF";
 
-FloatItem::FloatItem(Chiller* chiller):MenuItem(chiller)
+FloatItem::FloatItem(Chiller* chiller):MenuItem()
 {
+  this->chiller = chiller;
   active = false;
 }
 MenuItem* FloatItem::turn(int count)
@@ -20,8 +21,9 @@ MenuItem* FloatItem::turn(int count)
   return this;
 }
 
-IntItem::IntItem(Chiller* chiller):MenuItem(chiller)
+IntItem::IntItem(Chiller* chiller):MenuItem()
 {
+  this->chiller = chiller;
   active = false;
 }
 MenuItem* IntItem::turn(int count)
@@ -36,8 +38,9 @@ MenuItem* IntItem::turn(int count)
   return this;
 }
 
-BoolItem::BoolItem(Chiller* chiller):MenuItem(chiller)
+BoolItem::BoolItem(Chiller* chiller):MenuItem()
 {
+  this->chiller = chiller;
   active = false;
 }
 MenuItem* BoolItem::turn(int count)

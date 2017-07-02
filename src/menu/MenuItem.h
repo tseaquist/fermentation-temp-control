@@ -8,15 +8,13 @@
 class MenuItem
 {
   public:
-    Chiller* chiller;
-
     MenuItem* left;
     MenuItem* right;
     MenuItem* up;
     MenuItem* down;
 
   public:
-    MenuItem(Chiller* chiller);
+    MenuItem();
     virtual ~MenuItem(){};
 
     virtual void getTitle(char* title) {};

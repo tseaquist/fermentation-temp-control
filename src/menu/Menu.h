@@ -2,6 +2,7 @@
 #include "../display/LCD.h"
 #include "ParameterSettingTypes.h"
 #include "ChillerMenuItems.h"
+#include "ResetDefaults.h"
 
 class Menu
 {

@@ -1,8 +1,7 @@
 #include "MenuItem.h"
 
-MenuItem::MenuItem( Chiller* chiller )
+MenuItem::MenuItem( )
 {
-  this->chiller = chiller;
   left = this;
   right = this;
   up = this;

@@ -15,6 +15,9 @@ Menu::Menu(TempControllers* controls, LCD* lcd)
     previousItem->right = item;
     previousItem = item;
   }
+  item = new ResetDefaults(controls);
+  item->left = previousItem;
+  previousItem->right = item;
 
   onOff(false);
 }

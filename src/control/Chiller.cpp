@@ -1,4 +1,5 @@
 #include "Chiller.h"
+#include <EEPROM.h>
 
 Chiller::Chiller(int index) : Chiller(index, "Cooler"){}
 
