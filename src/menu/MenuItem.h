@@ -17,14 +17,15 @@ class MenuItem
 
   public:
     MenuItem(Chiller* chiller);
-    virtual ~MenuItem(){}
+    virtual ~MenuItem(){};
 
-    virtual void getTitle(char* title);
-    virtual void getValue(char* value);
+    virtual void getTitle(char* title) {};
+    virtual void getValue(char* value) {};
 
     virtual MenuItem* turn(int count);
     virtual MenuItem* click();
     virtual MenuItem* back();
+    virtual void reset(){};
 };
 
 #endif

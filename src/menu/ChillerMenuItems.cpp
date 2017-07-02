@@ -15,9 +15,7 @@ void ChillerMenuItem::getValue(char* value)
 }
 MenuItem* ChillerMenuItem::turn(int count)
 {
-  Serial.println(freeMemory());
   if(count != 0) kill();
-  Serial.println(freeMemory());
   return MenuItem::turn(count);
 }
 MenuItem* ChillerMenuItem::click()
@@ -29,14 +27,20 @@ MenuItem* ChillerMenuItem::click()
 }
 MenuItem* ChillerMenuItem::back()
 {
+  Serial.println(freeMemory());
   kill();
+  Serial.println(freeMemory());
   return NULL;
 }
 void ChillerMenuItem::kill()
 {
-  for(MenuItem* item : itemList)
+  for(int i = 0; i < 3; i++)
   {
-    delete item;
+    if(itemList[i]!=NULL)
+    {
+      delete itemList[i];
+      itemList[i] = NULL;
+    }
   }
 }
 void ChillerMenuItem::create()
@@ -67,13 +71,14 @@ FermentorMenuItem::FermentorMenuItem(FermentChiller* chiller):ChillerMenuItem(ch
 }
 void FermentorMenuItem::kill()
 {
-  for(MenuItem* item : itemList)
+  ChillerMenuItem::kill();
+  for(int i = 0; i < 4; i++)
   {
-    delete item;
-  }
-  for(MenuItem* item : rampList)
-  {
-    delete item;
+    if(rampList[i]!=NULL)
+    {
+      delete rampList[i];
+      rampList[i] = NULL;
+    }
   }
 }
 void FermentorMenuItem::create()
@@ -88,6 +93,7 @@ void FermentorMenuItem::create()
 
   cycleDuration->right = rampList[0];
   rampList[0]->left = cycleDuration;
+  rampList[0]->up = this;
 
   for(int k = 0; k < 4; k++)
   {

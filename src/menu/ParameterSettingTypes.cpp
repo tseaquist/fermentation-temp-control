@@ -33,7 +33,6 @@ MenuItem* IntItem::turn(int count)
   int val = selection;
   val += count;
   selection = val < 0 ? 0 : val;
-  selection = shorten(selection);
   return this;
 }
 
@@ -253,6 +252,7 @@ MenuItem* RampMode::click()
     fermentChiller->setRampEndTemp(currentTemp + 5.0);
     fermentChiller->setRampCurrentDuration_Hours(0);
     fermentChiller->setRampTotalDuration_Hours(48);
+    down->reset();
     return down;
   }
   else
@@ -276,6 +276,7 @@ RampDuration::RampDuration(FermentChiller* chiller) : IntItem(chiller)
 {
   this->fermentChiller = chiller;
   selection = fermentChiller->rampTotalDuration_Hours;
+  active = true;
 }
 void RampDuration::getTitle(char* title)
 {
@@ -283,22 +284,19 @@ void RampDuration::getTitle(char* title)
 }
 void RampDuration::getValue(char* value)
 {
-  if(!active)
-  {
-    int offset = 0;
-    strncpy(value, notActive, 16);
-    offset = strlen(value);
-    utoa(selection, value + offset, 10);
-    return;
-  }
   if(selection == fermentChiller->rampTotalDuration_Hours)
   {
+    Serial.println(selection);
     utoa(selection, value, 10);
+    Serial.println(value);
   }
   else
   {
+    Serial.println("new");
+    Serial.println(selection);
     utoa(selection, value, 10);
     strncat(value, newSelect, 16 - strlen(newSelect));
+    Serial.println(value);
   }
 }
 MenuItem* RampDuration::click()
@@ -306,6 +304,7 @@ MenuItem* RampDuration::click()
   fermentChiller->setRampTotalDuration_Hours(selection);
   fermentChiller->setRampCurrentDuration_Hours(0);
   fermentChiller->previousCycleTime = millis();
+  down->reset();
   return down;
 }
 MenuItem* RampDuration::back()
@@ -313,11 +312,16 @@ MenuItem* RampDuration::back()
   selection = fermentChiller->rampTotalDuration_Hours;
   return MenuItem::back();
 }
+void RampDuration::reset()
+{
+  selection = fermentChiller->rampTotalDuration_Hours;
+}
 
 RampStartTemp::RampStartTemp(FermentChiller* chiller) : FloatItem(chiller)
 {
   this->fermentChiller = chiller;
   selection = fermentChiller->rampStartTemp;
+  active = true;
 }
 void RampStartTemp::getTitle(char* title)
 {
@@ -325,14 +329,6 @@ void RampStartTemp::getTitle(char* title)
 }
 void RampStartTemp::getValue(char* value)
 {
-  if(!active)
-  {
-    int offset = 0;
-    strncpy(value, notActive, 16);
-    offset = strlen(value);
-    dtostrf((double)selection, 0, 1, value + offset);
-    return;
-  }
   if(selection == fermentChiller->rampStartTemp)
   {
     dtostrf((double)selection, 0, 1, value);
@@ -346,6 +342,7 @@ void RampStartTemp::getValue(char* value)
 MenuItem* RampStartTemp::click()
 {
   fermentChiller->setRampStartTemp(selection);
+  down->reset();
   return down;
 }
 MenuItem* RampStartTemp::back()
@@ -358,11 +355,16 @@ MenuItem* RampStartTemp::back()
   selection = fermentChiller->rampStartTemp;
   return MenuItem::back();
 }
+void RampStartTemp::reset()
+{
+  selection = fermentChiller->rampStartTemp;
+}
 
 RampEndTemp::RampEndTemp(FermentChiller* chiller) : FloatItem(chiller)
 {
   this->fermentChiller = chiller;
   selection = fermentChiller->rampEndTemp;
+  active = true;
 }
 void RampEndTemp::getTitle(char* title)
 {
@@ -370,14 +372,6 @@ void RampEndTemp::getTitle(char* title)
 }
 void RampEndTemp::getValue(char* value)
 {
-  if(!active)
-  {
-    int offset = 0;
-    strncpy(value, notActive, 16);
-    offset = strlen(value);
-    dtostrf((double)selection, 0, 1, value + offset);
-    return;
-  }
   if(selection == fermentChiller->rampEndTemp)
   {
     dtostrf((double)selection, 0, 1, value);
@@ -392,10 +386,14 @@ MenuItem* RampEndTemp::click()
 {
   fermentChiller->setRampEndTemp(selection);
   //return to and inactivate ramp mode item
-  return up->up->up->up->back();
+  return up->up->up->back();
 }
 MenuItem* RampEndTemp::back()
 {
   selection = fermentChiller->rampEndTemp;
   return MenuItem::back();
+}
+void RampEndTemp::reset()
+{
+  selection = fermentChiller->rampEndTemp;
 }

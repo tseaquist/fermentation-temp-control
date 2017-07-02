@@ -17,6 +17,7 @@ void setup()
   input = new Input();
   lcd = new LCD();
   controllers = new TempControllers();
+  // controllers->resetToDefault();
   menu = new Menu(controllers, lcd);
   menuOn = menu->menuOn;
   status = new Status(controllers, lcd);

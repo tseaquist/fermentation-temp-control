@@ -6,6 +6,7 @@ class ChillerMenuItem : public MenuItem
 public:
   MenuItem* itemList[3] = {0};
   ChillerMenuItem(Chiller* chiller);
+  virtual ~ChillerMenuItem(){}
   void getTitle(char* title);
   void getValue(char* value);
   MenuItem* turn(int count);
@@ -21,6 +22,7 @@ public:
   MenuItem* rampList[4] = {0};
   FermentChiller* fermentor;
   FermentorMenuItem(FermentChiller* chiller);
+  ~FermentorMenuItem(){};
   void kill();
   void create();
 };
