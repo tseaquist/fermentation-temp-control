@@ -1,10 +1,11 @@
 #include "ChillerInfo.h"
 
-ChillerInfo::ChillerInfo(Chiller* chiller, const char* name)
+ChillerInfo::ChillerInfo(Chiller* chiller, const char* title)
 {
   this->chiller = chiller;
-  this->name[0] = '\0';
-  copyForLcd(this->name, name);
+  this->title[0] = {0};
+  this->value[0] = {0};
+  strncpy(this->title, title, 16);
 }
 
 void ChillerInfo::displayInfo(LCD *lcd)
@@ -13,10 +14,10 @@ void ChillerInfo::displayInfo(LCD *lcd)
   float currentTemp = shorten(chiller->readTemp());
 
   char data[17] = "Temp:";
-  concatForLcd(data, String(currentTemp, 1).c_str());
+  dtostrf((double)currentTemp, 0, 1, data + strlen(data));
   //arrow ->
-  concatForLcd(data, "~");
-  concatForLcd(data, String(currentSetPoint, 1).c_str());
+  strncat(data, "~", 16 - strlen(data));
+  dtostrf((double)currentSetPoint, 0, 1, data + strlen(data));
 
-  lcd->show(name, data);
+  lcd->show(title, data);
 }

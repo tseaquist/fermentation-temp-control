@@ -53,6 +53,7 @@ public:
   void getValue(char* value);
   MenuItem* click();
   MenuItem* back();
+  void reset();
 };
 
 class Tolerance : public FloatItem
@@ -64,6 +65,7 @@ public:
   void getValue(char* value);
   MenuItem* click();
   MenuItem* back();
+  void reset();
 };
 
 class CycleDuration : public IntItem
@@ -75,6 +77,7 @@ public:
   void getValue(char* value);
   MenuItem* click();
   MenuItem* back();
+  void reset();
 };
 
 class RampMode : public BoolItem
@@ -87,6 +90,7 @@ public:
   void getValue(char* value);
   MenuItem* click();
   MenuItem* back();
+  void reset();
 };
 
 class RampDuration : public IntItem

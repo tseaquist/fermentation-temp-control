@@ -94,13 +94,17 @@ MenuItem* SetPoint::click()
 }
 MenuItem* SetPoint::back()
 {
+  reset();
   if(active)
   {
     active = false;
     return this;
   }
-  selection = chiller->setPoint;
   return MenuItem::back();
+}
+void SetPoint::reset()
+{
+  selection = chiller->setPoint;
 }
 
 Tolerance::Tolerance(Chiller* chiller) : FloatItem(chiller)
@@ -144,13 +148,17 @@ MenuItem* Tolerance::click()
 }
 MenuItem* Tolerance::back()
 {
+  reset();
   if(active)
   {
     active = false;
     return this;
   }
-  selection = chiller->tolerance;
   return MenuItem::back();
+}
+void Tolerance::reset()
+{
+  selection = chiller->tolerance;
 }
 
 CycleDuration::CycleDuration(Chiller* chiller) : IntItem(chiller)
@@ -194,13 +202,17 @@ MenuItem* CycleDuration::click()
 }
 MenuItem* CycleDuration::back()
 {
+  reset();
   if(active)
   {
     active = false;
     return this;
   }
-  selection = chiller->minCycleDuration_Minutes;
   return MenuItem::back();
+}
+void CycleDuration::reset()
+{
+  selection = chiller->minCycleDuration_Minutes;
 }
 
 RampMode::RampMode(FermentChiller* chiller) : BoolItem(chiller)
@@ -263,13 +275,17 @@ MenuItem* RampMode::click()
 }
 MenuItem* RampMode::back()
 {
+  reset();
   if(active)
   {
     active = false;
     return this;
   }
-  selection = chiller->minCycleDuration_Minutes;
   return MenuItem::back();
+}
+void RampMode::reset()
+{
+  selection = fermentChiller->rampModeOn;
 }
 
 RampDuration::RampDuration(FermentChiller* chiller) : IntItem(chiller)
@@ -309,7 +325,7 @@ MenuItem* RampDuration::click()
 }
 MenuItem* RampDuration::back()
 {
-  selection = fermentChiller->rampTotalDuration_Hours;
+  reset();
   return MenuItem::back();
 }
 void RampDuration::reset()
@@ -347,12 +363,7 @@ MenuItem* RampStartTemp::click()
 }
 MenuItem* RampStartTemp::back()
 {
-  if(active)
-  {
-    active = false;
-    return this;
-  }
-  selection = fermentChiller->rampStartTemp;
+  reset();
   return MenuItem::back();
 }
 void RampStartTemp::reset()
@@ -390,7 +401,7 @@ MenuItem* RampEndTemp::click()
 }
 MenuItem* RampEndTemp::back()
 {
-  selection = fermentChiller->rampEndTemp;
+  reset();
   return MenuItem::back();
 }
 void RampEndTemp::reset()

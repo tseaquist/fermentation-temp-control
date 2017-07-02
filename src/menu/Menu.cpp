@@ -29,7 +29,7 @@ bool Menu::update(int turnCount, bool rotaryClick, bool menuClick)
 {
   if(!menuOn)
   {
-    if(menuClick)
+    if(menuClick || rotaryClick)
     {
       onOff(true);
     }

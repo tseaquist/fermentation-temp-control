@@ -7,7 +7,8 @@ class ChillerInfo : public Info
 {
   public:
     Chiller* chiller;
-    char name[17];
+    char title[17];
+    char value[17];
 
   public:
     ChillerInfo(Chiller* chiller, const char* name);
