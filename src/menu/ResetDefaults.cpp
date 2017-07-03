@@ -3,12 +3,13 @@
 ResetDefaults::ResetDefaults(TempControllers* controls) : MenuItem()
 {
   this->controls = controls;
+  this->up = NULL;
   status = "Reset?";
 }
 MenuItem* ResetDefaults::click()
 {
   controls->resetToDefault();
-  status = "Reset complete";
+  status = "Reset Complete";
   return this;
 }
 MenuItem* ResetDefaults::turn(int count)

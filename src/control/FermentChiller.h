@@ -18,11 +18,11 @@ class FermentChiller : public Chiller
     int rampModeOnOffset = 2 * sizeof(float) + 1 * sizeof(int);
     int rampStartTempOffset = 2 * sizeof(float) + 1 * sizeof(int)
       + 1 * sizeof(bool);
-    int rampEndTempOffset = 2 * sizeof(float) + 2 * sizeof(int)
+    int rampEndTempOffset = 3 * sizeof(float) + 1 * sizeof(int)
       + 1 * sizeof(bool);
-    int rampCurrentDurationOffset = 2 * sizeof(float) + 3 * sizeof(int)
+    int rampCurrentDurationOffset = 4 * sizeof(float) + 1 * sizeof(int)
       + 1 * sizeof(bool);
-    int rampTotalDurationOffset = 2 * sizeof(float) + 4 * sizeof(int)
+    int rampTotalDurationOffset = 4 * sizeof(float) + 2 * sizeof(int)
       + 1 * sizeof(bool);
 
   public:

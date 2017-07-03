@@ -21,16 +21,12 @@ MenuItem* ChillerMenuItem::turn(int count)
 }
 MenuItem* ChillerMenuItem::click()
 {
-  Serial.println(freeMemory());
   create();
-  Serial.println(freeMemory());
   return MenuItem::click();
 }
 MenuItem* ChillerMenuItem::back()
 {
-  Serial.println(freeMemory());
   kill();
-  Serial.println(freeMemory());
   return NULL;
 }
 void ChillerMenuItem::kill()

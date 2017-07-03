@@ -272,6 +272,7 @@ MenuItem* RampMode::click()
   }
   else
   {
+    fermentChiller->setRampModeOn(selection);
     active = false;
     return this;
   }
@@ -305,17 +306,12 @@ void RampDuration::getValue(char* value)
 {
   if(selection == fermentChiller->rampTotalDuration_Hours)
   {
-    Serial.println(selection);
     utoa(selection, value, 10);
-    Serial.println(value);
   }
   else
   {
-    Serial.println("new");
-    Serial.println(selection);
     utoa(selection, value, 10);
     strncat(value, newSelect, 16 - strlen(newSelect));
-    Serial.println(value);
   }
 }
 MenuItem* RampDuration::click()

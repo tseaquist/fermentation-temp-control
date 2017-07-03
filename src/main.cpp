@@ -21,7 +21,6 @@ void setup()
   menu = new Menu(controllers, lcd);
   menuOn = menu->menuOn;
   status = new Status(controllers, lcd);
-  status->update();
 }
 
 void loop()
@@ -36,6 +35,6 @@ void loop()
   }
   if(!menuOn)
   {
-    status->update();
+    status->update(turnCount);
   }
 }

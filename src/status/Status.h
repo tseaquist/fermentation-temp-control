@@ -8,9 +8,10 @@ class Status
   public:
     TempControllers* tempControllers;
     LCD* lcd;
-    Info* info[1];
+    int index;
 
   public:
     Status(TempControllers* tempControllers, LCD* lcd);
-    void update();
+    void update(int count);
+    void turn(int count);
 };
