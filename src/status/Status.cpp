@@ -13,7 +13,7 @@ void Status::update(int count)
     FermentChiller* ferm = index < 0 ? NULL : tempControllers->fermentChillers[index];
     char row1[17] = {0};
     strncpy(row1, chiller->name, 16);
-    strncat(row1, ":", 16 - strlen(row1));
+    strncat(row1, ": ", 16 - strlen(row1));
     double temp = chiller->readTemp();
     dtostrf((double)temp, 0, 1, row1 + strlen(row1));
 
@@ -21,7 +21,7 @@ void Status::update(int count)
     float setPoint = chiller->setPoint;
     if(ferm == NULL || !ferm->rampModeOn )
     {
-      strncpy(row2, "Set Pnt:", 16);
+      strncpy(row2, "SP: ", 16);
       dtostrf((double)setPoint, 0, 1, row2 + strlen(row2));
     }
     else

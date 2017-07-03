@@ -19,7 +19,7 @@ MenuItem* ResetDefaults::turn(int count)
 }
 void ResetDefaults::getTitle(char* title)
 {
-  strncpy(title, "Reset Parameters", 16);
+  strncpy(title, "Parameters", 16);
 }
 void ResetDefaults::getValue(char* value)
 {
