@@ -25,7 +25,7 @@ void setup()
 
 void loop()
 {
-  // controllers->update();
+  controllers->update();
   int turnCount = input->getTurnCount();
   bool rotaryClick = input->isRotaryClick();
   bool menuClick = input->isMenuClick();

@@ -1,10 +1,9 @@
 #include "Chiller.h"
 #include <EEPROM.h>
 
-Chiller::Chiller(int index) : Chiller(index, "Cooler"){}
-
-Chiller::Chiller(int index, const char* name)
+Chiller::Chiller(int index, Thermistor* thermistor, const char* name)
 {
+  this->thermistor = thermistor;
   this->name = name;
   this->index = index;
   this->addr = index * memSpaceTotal;
@@ -65,6 +64,5 @@ void Chiller::cycle(bool on)
 
 float Chiller::readTemp()
 {
-  //TODO read temperature from correct pin
-  return 0;
+  return thermistor->getTemp();
 }

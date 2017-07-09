@@ -1,6 +1,6 @@
 #ifndef CONTROLLERS_H
 #define CONTROLLERS_H
-
+#include "../temp/Thermistor.h"
 #include "FermentChiller.h"
 // #include <vector>
 using namespace std;
@@ -8,8 +8,7 @@ using namespace std;
 class TempControllers
 {
   public:
-    int const numFerments = 1;
-    const char* names[1] = {"Tank A"};
+    int numFerments;
     FermentChiller* fermentChillers[1];
     Chiller* chillerLiquid;
 

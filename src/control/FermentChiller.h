@@ -26,7 +26,7 @@ class FermentChiller : public Chiller
       + 1 * sizeof(bool);
 
   public:
-    FermentChiller( int index, const char* name );
+    FermentChiller( int index, Thermistor* thermistor, const char* name );
     void update();
     float getRampSetPoint(unsigned int rampTotalDuration_Hours);
 

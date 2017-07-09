@@ -2,11 +2,13 @@
 #define CHILLER_H
 
 #include "Arduino.h"
+#include "../temp/Thermistor.h"
 
 class Chiller
 {
   public:
     const char* name;
+    Thermistor* thermistor;
 
     static int const memSpaceTotal = 128;
     int index;
@@ -22,8 +24,7 @@ class Chiller
     unsigned int minCycleDuration_Minutes;
 
   public:
-    Chiller( int index );
-    Chiller( int index, const char* name );
+    Chiller( int index, Thermistor* thermistor, const char* name );
     virtual ~Chiller(){}
     void update();
     float readTemp();
