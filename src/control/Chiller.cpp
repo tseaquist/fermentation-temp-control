@@ -1,8 +1,9 @@
 #include "Chiller.h"
 #include <EEPROM.h>
 
-Chiller::Chiller(int index, Thermistor* thermistor, const char* name)
+Chiller::Chiller(int index, unsigned int controlPin, Thermistor* thermistor, const char* name)
 {
+  this->controlPin = controlPin;
   this->thermistor = thermistor;
   this->name = name;
   this->index = index;
@@ -10,6 +11,9 @@ Chiller::Chiller(int index, Thermistor* thermistor, const char* name)
   EEPROM.get(addr + setPointOffset, setPoint);
   EEPROM.get(addr + toleranceOffset, tolerance);
   EEPROM.get(addr + minCycleDurationOffset, minCycleDuration_Minutes);
+
+  pinMode(controlPin, OUTPUT);
+  digitalWrite(controlPin, LOW);
 
   isOn = false;
   previousCycleTime = millis();
@@ -40,7 +44,7 @@ void Chiller::update()
   bool belowThreshold = temp < setPoint - tolerance;
   unsigned long sinceLastCycle = ( millis() - previousCycleTime );
   unsigned int sinceLastCycle_Minutes = ( unsigned ) ( sinceLastCycle / 60000.0 );
-  bool cycleSafe = sinceLastCycle_Minutes > minCycleDuration_Minutes;
+  bool cycleSafe = sinceLastCycle_Minutes >= minCycleDuration_Minutes;
 
   if(!isOn && aboveThreshold && cycleSafe)
   {
@@ -54,12 +58,13 @@ void Chiller::update()
 
 void Chiller::cycle(bool on)
 {
+  if(isOn == on) return;
   isOn = on;
   if(!on)
   {
     previousCycleTime = millis();
   }
-  //TODO implement turn-on turn-off relay
+  digitalWrite(controlPin, on ? HIGH : LOW);
 }
 
 float Chiller::readTemp()

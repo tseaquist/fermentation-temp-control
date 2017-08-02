@@ -1,7 +1,7 @@
 #include "Input.h"
 
 Input::Input():
-  dial(2, 3),
+  dial(3, 2),
   rotaryButton(4),
   menuButton(5)
 {

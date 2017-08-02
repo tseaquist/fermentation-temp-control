@@ -10,8 +10,9 @@ Thermistor::Thermistor(unsigned int pin, double resistor, double A1, double A2, 
   this->steinhartA4 = A4;
 
   //Take the pin out of pull-up mode.
-  pinMode(pin, INPUT);
-  digitalWrite(pin, LOW);
+  //Arduino analog pins are 14-19 when accessed in digital mode.
+  pinMode(14 + pin, INPUT);
+  digitalWrite(14 + pin, LOW);
   //Throw away first read.
   analogRead(pin);
 

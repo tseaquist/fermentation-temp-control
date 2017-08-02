@@ -9,6 +9,7 @@ class Chiller
   public:
     const char* name;
     Thermistor* thermistor;
+    unsigned int controlPin;
 
     static int const memSpaceTotal = 128;
     int index;
@@ -24,7 +25,7 @@ class Chiller
     unsigned int minCycleDuration_Minutes;
 
   public:
-    Chiller( int index, Thermistor* thermistor, const char* name );
+    Chiller( int index, unsigned int controlPin, Thermistor* thermistor, const char* name );
     virtual ~Chiller(){}
     void update();
     float readTemp();
