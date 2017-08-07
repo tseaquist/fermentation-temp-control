@@ -261,12 +261,13 @@ MenuItem* RampMode::click()
       return down;
     }
     float currentTemp = chiller->readTemp();
+    fermentChiller->rampStartTime = millis();
+    fermentChiller->setRampCurrentDuration_Hours(0);
+    fermentChiller->setRampTotalDuration_Hours(48);
     fermentChiller->setRampModeOn(selection);
     fermentChiller->setSetPoint(currentTemp);
     fermentChiller->setRampStartTemp(currentTemp);
     fermentChiller->setRampEndTemp(currentTemp + 5.0);
-    fermentChiller->setRampCurrentDuration_Hours(0);
-    fermentChiller->setRampTotalDuration_Hours(48);
     down->reset();
     return down;
   }
@@ -316,8 +317,9 @@ void RampDuration::getValue(char* value)
 }
 MenuItem* RampDuration::click()
 {
-  fermentChiller->setRampTotalDuration_Hours(selection);
+  fermentChiller->rampStartTime = millis();
   fermentChiller->setRampCurrentDuration_Hours(0);
+  fermentChiller->setRampTotalDuration_Hours(selection);
   fermentChiller->previousCycleTime = millis();
   down->reset();
   return down;
