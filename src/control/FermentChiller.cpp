@@ -37,10 +37,9 @@ void FermentChiller::update()
 
 float FermentChiller::getRampSetPoint(unsigned int rampCurrentDuration_Hours)
 {
-  if(rampCurrentDuration_Hours > rampTotalDuration_Hours)
+  if(rampCurrentDuration_Hours >= rampTotalDuration_Hours)
   {
     setRampModeOn(false);
-    setSetPoint(rampEndTemp);
     return rampEndTemp;
   }
   else

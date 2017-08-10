@@ -31,9 +31,9 @@ void Status::update(int count)
       dtostrf((double)setPoint, 0, 1, row2 + strlen(row2));
       strncat(row2, "~", 16 - strlen(row2));
       dtostrf((double)endTemp, 0, 1, row2 + strlen(row2));
-      strncat(row2, ":", 16 - strlen(row2));
+      strncat(row2, ": ", 16 - strlen(row2));
       itoa(timeLeft, row2 + strlen(row2), 10);
-      strncat(row2, "hrs", 16 - strlen(row2));
+      strncat(row2, "hr", 16 - strlen(row2));
     }
     lcd->show(row1, row2);
 }

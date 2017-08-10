@@ -2,11 +2,14 @@
 
 TempControllers::TempControllers( )
 {
-  numFerments = 1;
   Thermistor* therm1 = new Thermistor(0, 10000, 0.001125308852122, 0.000234711863267, 0.0, 0.000000085663516);
   fermentChillers[0] = new FermentChiller(0, 6, therm1, "Tank A");
-  Thermistor* thermChiller = new Thermistor(0, 10000, 0.001125308852122, 0.000234711863267, 0.0, 0.000000085663516);
-  chillerLiquid = new Chiller(numFerments, 7, thermChiller, "Chiller");
+  Thermistor* therm2 = new Thermistor(1, 10000, 0.001125308852122, 0.000234711863267, 0.0, 0.000000085663516);
+  fermentChillers[1] = new FermentChiller(1, 7, therm2, "Tank B");
+  Thermistor* therm3 = new Thermistor(2, 10000, 0.001125308852122, 0.000234711863267, 0.0, 0.000000085663516);
+  fermentChillers[2] = new FermentChiller(2, 8, therm3, "Tank C");
+  Thermistor* thermChiller = new Thermistor(3, 10000, 0.001125308852122, 0.000234711863267, 0.0, 0.000000085663516);
+  chillerLiquid = new Chiller(numFerments, 9, thermChiller, "Chiller");
 }
 
 void TempControllers::update()

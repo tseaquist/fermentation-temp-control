@@ -8,8 +8,8 @@ using namespace std;
 class TempControllers
 {
   public:
-    int numFerments;
-    FermentChiller* fermentChillers[1];
+    int numFerments = 3;
+    FermentChiller* fermentChillers[3];
     Chiller* chillerLiquid;
 
   public:
