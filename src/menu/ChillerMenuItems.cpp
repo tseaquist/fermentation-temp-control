@@ -4,15 +4,29 @@
 ChillerMenuItem::ChillerMenuItem(Chiller* chiller):MenuItem()
 {
   this->chiller = chiller;
-  up = NULL;
+  this->up = this;
 }
 void ChillerMenuItem::getTitle(char* title)
 {
+  title[0] = '\0';
   strncpy(title, chiller->name, 16);
+  strncat(title, ": ", 16 - strlen(title));
+  double temp = chiller->readTemp();
+  if(temp > 50)
+  {
+    dtostrf((double)temp, 0, 1, title + strlen(title));
+  }
+  else
+  {
+    strncat(title, "NA", 16 - strlen(title));
+  }
 }
 void ChillerMenuItem::getValue(char* value)
 {
-  strncpy(value, "~Settings", 16);
+  value[0] = '\0';
+  float setPoint = chiller->setPoint;
+  strncpy(value, "SP: ", 16);
+  dtostrf((double)setPoint, 0, 1, value + strlen(value));
 }
 MenuItem* ChillerMenuItem::turn(int count)
 {
@@ -26,8 +40,7 @@ MenuItem* ChillerMenuItem::click()
 }
 MenuItem* ChillerMenuItem::back()
 {
-  kill();
-  return NULL;
+  return this;
 }
 void ChillerMenuItem::kill()
 {
@@ -40,6 +53,7 @@ void ChillerMenuItem::kill()
     }
   }
 }
+
 void ChillerMenuItem::create()
 {
   itemList[0] = new SetPoint(chiller);
@@ -66,6 +80,29 @@ FermentorMenuItem::FermentorMenuItem(FermentChiller* chiller):ChillerMenuItem(ch
 {
   fermentor = chiller;
 }
+
+void FermentorMenuItem::getValue(char *value)
+{
+  value[0] = '\0';
+  float setPoint = chiller->setPoint;
+  if(!fermentor->rampModeOn )
+  {
+    strncpy(value, "SP: ", 16);
+    dtostrf((double)setPoint, 0, 1, value + strlen(value));
+  }
+  else
+  {
+    float endTemp = fermentor->rampEndTemp;
+    int timeLeft = fermentor->rampTotalDuration_Hours - fermentor->rampCurrentDuration_Hours;
+    dtostrf((double)setPoint, 0, 1, value + strlen(value));
+    strncat(value, "~", 16 - strlen(value));
+    dtostrf((double)endTemp, 0, 1, value + strlen(value));
+    strncat(value, ": ", 16 - strlen(value));
+    itoa(timeLeft, value + strlen(value), 10);
+    strncat(value, "hr", 16 - strlen(value));
+  }
+}
+
 void FermentorMenuItem::kill()
 {
   ChillerMenuItem::kill();

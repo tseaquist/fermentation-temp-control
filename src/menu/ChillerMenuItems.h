@@ -9,7 +9,7 @@ public:
   ChillerMenuItem(Chiller* chiller);
   virtual ~ChillerMenuItem(){}
   void getTitle(char* title);
-  void getValue(char* value);
+  virtual void getValue(char* value);
   MenuItem* turn(int count);
   MenuItem* click();
   MenuItem* back();
@@ -24,6 +24,7 @@ public:
   FermentChiller* fermentor;
   FermentorMenuItem(FermentChiller* chiller);
   ~FermentorMenuItem(){};
+  void getValue(char* value);
   void kill();
   void create();
 };

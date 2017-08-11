@@ -93,7 +93,7 @@ MenuItem* SetPoint::click()
   }
   active = false;
   chiller->setSetPoint(selection);
-  return this;
+  return back();
 }
 MenuItem* SetPoint::back()
 {
@@ -147,7 +147,7 @@ MenuItem* Tolerance::click()
   }
   active = false;
   chiller->setTolerance(selection);
-  return this;
+  return back();
 }
 MenuItem* Tolerance::back()
 {
@@ -201,7 +201,7 @@ MenuItem* CycleDuration::click()
   }
   active = false;
   chiller->setMinCycleDuration_Minutes(selection);
-  return this;
+  return back();
 }
 MenuItem* CycleDuration::back()
 {
@@ -261,6 +261,7 @@ MenuItem* RampMode::click()
       return down;
     }
     float currentTemp = chiller->readTemp();
+    currentTemp = currentTemp > 32 ? currentTemp : 32;
     fermentChiller->rampStartTime = millis();
     fermentChiller->setRampCurrentDuration_Hours(0);
     fermentChiller->setRampTotalDuration_Hours(48);
@@ -275,7 +276,7 @@ MenuItem* RampMode::click()
   {
     fermentChiller->setRampModeOn(selection);
     active = false;
-    return this;
+    return back();
   }
 }
 MenuItem* RampMode::back()
@@ -398,7 +399,7 @@ MenuItem* RampEndTemp::click()
 {
   fermentChiller->setRampEndTemp(selection);
   //return to and inactivate ramp mode item
-  return up->up->up->back();
+  return up->up->up->up->back();
 }
 MenuItem* RampEndTemp::back()
 {

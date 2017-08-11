@@ -22,64 +22,28 @@ Menu::Menu(TempControllers* controls, LCD* lcd)
   item->left = previousItem;
   previousItem->right = item;
   previousItem = item;
-
-  onOff(false);
 }
 
-void Menu::onOff( bool onOff)
+void Menu::update(int turnCount, bool rotaryClick, bool menuClick)
 {
-  currentItem = rootItem;
-  menuOn = onOff;
-}
-
-bool Menu::update(int turnCount, bool rotaryClick, bool menuClick)
-{
-  if(!menuOn)
+  if(menuClick)
   {
-    if(menuClick || rotaryClick)
-    {
-      onOff(true);
-    }
-    else
-    {
-      return false;
-    }
+    currentItem = currentItem->back();
   }
-  else
+  if(turnCount != 0)
   {
-    if(menuClick)
-    {
-      currentItem = currentItem->back();
-    }
-    if(turnCount != 0)
-    {
-      currentItem = currentItem->turn(turnCount);
-    }
-    if(rotaryClick)
-    {
-      currentItem = currentItem->click();
-    }
+    currentItem = currentItem->turn(turnCount);
+  }
+  if(rotaryClick)
+  {
+    currentItem = currentItem->click();
   }
 
-  if(currentItem == NULL)
-  {
-    onOff(false);
-    return false;
-  }
-  else
-  {
-    display(currentItem);
-  }
-  return true;
+  display(currentItem);
 }
 void Menu::display(MenuItem* item)
 {
   currentItem->getTitle(title);
   currentItem->getValue(value);
   lcd->show(title, value);
-}
-
-void Menu::exitMenu()
-{
-  //TODO decide if this is necesarry
 }
