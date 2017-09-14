@@ -12,7 +12,7 @@ void ChillerMenuItem::getTitle(char* title)
   strncpy(title, chiller->name, 16);
   strncat(title, ": ", 16 - strlen(title));
   double temp = chiller->readTemp();
-  if(temp > 50)
+  if(temp > -50)
   {
     dtostrf((double)temp, 0, 1, title + strlen(title));
   }
