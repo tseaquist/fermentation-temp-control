@@ -360,6 +360,7 @@ void RampStartTemp::getValue(char* value)
 MenuItem* RampStartTemp::click()
 {
   fermentChiller->setRampStartTemp(selection);
+  fermentChiller->setSetPoint(selection);
   down->reset();
   return down;
 }
