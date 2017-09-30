@@ -51,4 +51,5 @@ void Thermistor::update()
   //Final part is to invert
   temp = 1.0 / temp;
   lastTemp = (float)(9.0 * (temp - 273.0) / 5.0 + 32.0);
+    Serial.printf("Temp:%f, Resistance:%f\n", lastTemp, resistance);
 }

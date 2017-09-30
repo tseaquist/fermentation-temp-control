@@ -11,11 +11,10 @@ bool menuOn;
 
 void setup()
 {
-  // Serial.begin(9600);
+  Serial.begin(9600);
   input = new Input();
   lcd = new LCD();
   controllers = new TempControllers();
-  // controllers->resetToDefault();
   menu = new Menu(controllers, lcd);
 }
 
