@@ -12,6 +12,7 @@ bool menuOn;
 void setup()
 {
   Serial.begin(9600);
+  analogReference(EXTERNAL);
   input = new Input();
   lcd = new LCD();
   controllers = new TempControllers();
