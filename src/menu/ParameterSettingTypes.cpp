@@ -400,7 +400,7 @@ MenuItem* RampEndTemp::click()
 {
   fermentChiller->setRampEndTemp(selection);
   //return to and inactivate ramp mode item
-  return up->up->up->up->back();
+  return back()->back()->back()->back()->back();
 }
 MenuItem* RampEndTemp::back()
 {

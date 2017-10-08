@@ -41,7 +41,8 @@ void Chiller::update()
 {
   float temp = readTemp();
   bool aboveThreshold = temp > setPoint + tolerance;
-  bool belowThreshold = temp < setPoint - tolerance;
+  //below temp or NaN
+  bool belowThreshold = temp < setPoint - tolerance || temp != temp;
   unsigned long sinceLastCycle = ( millis() - previousCycleTime );
   unsigned int sinceLastCycle_Minutes = ( unsigned ) ( sinceLastCycle / 60000.0 );
   bool cycleSafe = sinceLastCycle_Minutes >= minCycleDuration_Minutes;

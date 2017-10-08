@@ -1,5 +1,4 @@
 #include "ChillerMenuItems.h"
-#include <MemoryFree.h>
 
 ChillerMenuItem::ChillerMenuItem(Chiller* chiller):MenuItem()
 {
@@ -12,7 +11,8 @@ void ChillerMenuItem::getTitle(char* title)
   strncpy(title, chiller->name, 16);
   strncat(title, ": ", 16 - strlen(title));
   double temp = chiller->readTemp();
-  if(temp > -50)
+  //check for NaN
+  if( temp == temp )
   {
     dtostrf((double)temp, 0, 1, title + strlen(title));
   }
@@ -35,6 +35,7 @@ MenuItem* ChillerMenuItem::turn(int count)
 }
 MenuItem* ChillerMenuItem::click()
 {
+  kill();
   create();
   return MenuItem::click();
 }
